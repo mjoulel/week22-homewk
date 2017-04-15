@@ -1,0 +1,270 @@
+Homework
+Core JavaScript Questions
+
+What is the difference between undefined and not defined in JavaScript?
+- undefined: var hasn't been declared / assigned a val.
+- not defined: var doesn't exist 
+
+What is "Hoisting" in JavaScript?
+- Using a var before it has been declared or moving declarations to the beginning of the code
+What would be the output of the following code?
+var y = 1;
+      if (function f(){}) {
+        y += typeof f;
+      }
+     console.log(y);
+
+- Ans: 1
+
+What is a "private method"?
+- A way to NOT allow subclasses to inherit them so you don't have to make many functions for each declared instance.
+What is the drawback of creating true private methods in JavaScript?
+- Var.s declared w/in private methods are NOT globally accessible.
+What is a “closure” in JavaScript? Provide an example.
+- A fn that has access to local, outer, & global var.s
+Write a mul function which will produce the following outputs when invoked.
+console.log(mul(2)(3)(4)); // output : 24 
+console.log(mul(4)(3)(4)); // output : 48
+- Ans:
+var ans = (function multipli(num1){  
+    return function (num2){
+    	return function (num3){
+    		return num1 * num2 * num3;
+    	}
+    } 
+}); 
+console.log(ans);
+
+How would you empty an array in JavaScript? Provide at least 2 methods of doing so.
+- Ans:
+array = [];
+OR
+array.splice(0, array.length);
+
+What will be the output of the following code?
+var output = (function(x){
+    delete x;
+    return x;
+  })(0);
+  
+  console.log(output);
+
+- Ans: output = 0
+delete is an operator used to rmv a prop. from an obj.
+
+What about this code?
+
+var x = 1;
+var output = (function(){
+    delete x;
+    return x;
+  })();
+  
+  console.log(output);
+And what about this one?
+
+- Ans: output = 1
+delete operator is used to rmv a prop. from an obj. var x = 1 is a global var.
+
+var x = { foo : 1};
+var output = (function(){
+    delete x.foo;
+    return x.foo;
+  })();
+  
+  console.log(output);
+And finally, what about this one?
+
+- Ans: output = undef.d because 'delete x.foo' rmv'd the prop. from the obj.
+
+var Employee = {
+  company: 'xyz'
+}
+var emp1 = Object.create(Employee);
+delete emp1.company
+console.log(emp1.company);
+What would this code return?
+
+- Ans: output = xyz because emp1 = Employee = company: 'xyz'
+
+
+var trees = ["xyz","xxxx","test","ryan","apple"];
+delete trees[3];
+  
+  console.log(trees.length);
+What will be the output of the code below?
+
+- Ans: trees.length = 5. .pop() removes elements from the array.
+
+var bar = true;
+console.log(bar + 0);   
+console.log(bar + "xyz");  
+console.log(bar + true);  
+console.log(bar + false);   
+What will be the output of the code below?
+
+- Ans: output= 1, truexyz, 2, 1 . General guideline for addition of operator:
+Number + Number -> Addition
+Boolean + Number -> Addition
+Number + String -> Concatenation
+String + Boolean -> Concatenation
+String + String -> Concatenation
+
+var z = 1, y = z = typeof y;
+console.log(y);  
+What would be the output of the code below?
+
+- Ans: undefined because typeof y is evaluated before y = z.
+
+ var salary = "1000$";
+
+ (function () {
+     console.log("Original salary was " + salary);
+
+     var salary = "5000$";
+
+     console.log("My New Salary " + salary);
+ })();
+What would be the output of the code below?
+
+- Ans: output: undefined, 5000$
+
+What is the instanceof operator in JavaScript? What would be the output of the code below?
+- It is an operator that checks the current object & if it returns true when the object is of a specific type.
+- output = false
+
+function foo(){ 
+  return foo; 
+}
+new foo() instanceof foo;
+
+
+What constitutes a "Primitive" value in Javascript?
+- Primitive is a Javascript data type that can be numbers, boolean values, null and undefined types. A primitive type has a fixed size in memory. 
+Objects, arrays, and functions are reference types. Reference types do NOT have a fixed size in memory.
+
+What is the difference between a reference type variable and a value type variable?
+- A reference type variable holds a pointer to a memory location that points to the real data. A value type variable holds the data w/in its own memory location.
+
+How would you describe the difference between class-based inheritance and prototypical inheritance?
+- Object-based inheritance / prototypal inheritance in when one object inherits from another object without invoking a constructor function. Class-based inheritance is a description of the object to be created. Classes inherit from classes & create subclass relationships. The super() constructor creates parent / child / grandchild relationships (i.e. class-based inheritance).
+
+ES6 Questions
+
+What is the difference between JavaScript and ECMAScript?
+- ECMAScript 5 introduce several methods to prevent modification / changing functionality of an object.
+
+What do const and let do? And when would we use them?
+- `const` means that the identifier can’t be reassigned. `let` is used to reassign a variable. Use `let` tends for loops or mathematical algorithms.
+
+How would you describe the difference between function and function*?
+- function is a language keyword used to define first class object containing a sequence of statements.
+function* is a keyword used to define a generator function.
+
+When would you NOT use an arrow function in the place of a regular function expression?
+Refactor the following code to use an ES6 Template Literal.
+var name = 'Tiger';
+var age = 13;
+console.log('My cat is named ' + name + ' and is ' + age + ' years old.');
+
+- Ans: An arrow function expression does not bind its own this, arguments, super, or new.target, & are best suited for non-method functions, and they cannot be used as constructors.
+const name = 'Tiger';
+const age = 13; 
+console.log('My cat is named ' + name + ' and is ' + age + ' years old.');
+
+
+How would you refactor the following code to use ES6 default parameters?
+function addTwoNumbers(x, y) {
+    x = x || 0;
+    y = y || 0;
+    return x + y;
+}
+
+- Ans:
+function addTwoNumbers(x=0, y=0) {
+    	return x + y;
+    }    
+}
+
+
+What is a "Promise" in ES6? And how many different states do they have?
+- 'Promise' in ES6 allows us to turn horizontal code into vertial code.
+
+What is a practical use case for Promises?
+- Using Promises for error handling creates a clear path to bubbling errors up and handling them appropriately. Also, the value of a Promise after it has been resolved/rejected is immutable - it will never change.
+
+What is wrong with the following code? And how could it be better?
+new Promise((resolve, reject) => {  
+  throw new Error('error')
+}).then(console.log)
+
+- Ans:
+The above code only handles the Promise reject, not the Promise resolve.
+
+new Promise((resolve, reject) =>{
+		.then(resolve => {
+			console.log(reason);
+		})
+	    reject(new Error('error')))
+        .catch(reason => console.log(reason));
+});
+
+
+Describe the .fetch() method. What is one disadvantage to using the .fetch() method over existing methods?
+
+- .fetch() is an API that provides an interface for fetching resources (including across the network). Disadvantage: There is no way to cancel a fetch.
+
+Node.js Questions
+
+What is Node.js?
+- Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
+
+What is an "Error-First" Callback?
+- There’s really only two rules for defining an error-first callback:
+
+1. The first argument of the callback is reserved for an error object. If an error occurred, it will be returned by the first err argument.
+2. The second argument of the callback is reserved for any successful response data. If no error occurred, err will be set to null and any successful data will be returned in the second argument.
+
+What is the Node.js Event Loop?
+- The event loop is what allows Node.js to perform non-blocking I/O operations  by offloading operations to the system kernel whenever possible.
+
+Why might someone choose to use the Node.js Async single-threaded model over a more traditional multi-threaded model?
+- Asynchronous execution refers to execution that doesn't run in the sequence it appears in the code. The non-blocking, asynchronous operation is that you can maximize the usage of a single CPU & memory.
+
+What is meant by the term "non-blocking I/O"?
+- Non-blocking refers to code that doesn't block execution during the operation. 
+
+What is the "memory stack"? And what happens when you exceed it?
+Memory stack contains local variables and pointers to objects on the heap or pointers defining the control flow of the application. The heap is dedicated to store reference type objects, like strings or objects.
+
+There is a strict standard limit for the memory usage in V8 of around 1.7 GB, if you do not increase it manually.
+
+In one of our products we followed this solution in our deploy script:
+
+ node --max_old_space_size=4096 yourFile.js
+There would also be a new space command but as I read here: a-tour-of-v8-garbage-collection the new space only collects the newly created short-term data and the old space contains all referenced data structures which should be in your case the best option.
+
+React.js Questions
+
+What makes React.js more efficient at updating the DOM?
+What is the difference between a Logical component and a Pure component?
+What happens when you call "setState" in React?
+What is the React method to create a component? Alternatively, how would you accomplish the same thing using ES6 classes?
+In which React lifecycle event would you make AJAX requests? And why?
+Why would you use React.Children.map(props.children, () => ) instead of props.children.map(() => )?
+What is JSX?
+Internet/Network Questions
+
+What does TCP/IP stand for?
+- TCP/IP (Transmission Control Protocol/Internet Protocol) is the basic communication language or protocol of the Internet. It can also be used as a communications protocol in a private network (either an intranet or an extranet).
+
+Behind the scenes, how does HTTPS differ from HTTP?
+- HyperText Transfer Protocol (HTTP)
+- Instead of HyperText Transfer Protocol (HTTP), this website uses HyperText Transfer Protocol Secure (HTTPS).
+
+Using HTTPS, the computers agree on a "code" between them, and then they scramble the messages using that "code" so that no one in between can read them. This keeps your information safe from hackers.
+
+Define the general response status code categories.
+What does DDOS stand for?
+What is CORS? How does it work?
+What does REST stand for when we refer it in the context of a "RESTful API"?
